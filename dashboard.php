@@ -36,7 +36,7 @@ if (isset($_SESSION['uid'])) {
         </div>
     </section>
 
-    <section>
+    <section> 
         <div class="rt-container">
             <div class="row">
                 <textarea rows="5" class="cm-input" placeholder="Enter your text here..." id="mszarea" ></textarea>
@@ -44,8 +44,7 @@ if (isset($_SESSION['uid'])) {
                     <button style="border-radius: 5px;font-size: 16px;color: white;background: #482f97;padding: 10px;border: none;" onclick="published()" >Published</button>
                 </div>
                 <?php 
-                $txt=mysqli_query($con,"select * from textdata order by id desc");
-
+                $txt=mysqli_query($con,"select t.*,u.name from textdata as t left join user as u on t.userid=u.id order by id desc");
                 $count=0;
                 $resText='';
                 while ($row=mysqli_fetch_assoc($txt)) {
