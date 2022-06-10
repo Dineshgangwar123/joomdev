@@ -2,14 +2,14 @@
 session_start();
 include 'config.php';
 if (isset($_SESSION['uid'])) {
-    
+
 }else{
-     header('location: index.php');
+   header('location: index.php');
 }
 if (isset($_SESSION['uid'])) {
     $userId=$_SESSION['uid'];
 }
-
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@ if (isset($_SESSION['uid'])) {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Traveling Expence Tracker</title>
+    <title>JoomDev Project</title>
     <meta name="author" content="Codeconvey" />
     
     <!-- Font Awesome -->
@@ -26,48 +26,46 @@ if (isset($_SESSION['uid'])) {
     <link rel="stylesheet" href="css/login-page.css">
     
     <link rel="stylesheet" href="css/demo.css" />
-	
+
 </head>
 <body>
 
-<section>
-    <div  style="background: black;color: white;padding: 20px;font-size: 20px;" align="right">
-        <a href="logout.php">Logout</a>   
-    </div>
-</section>
+    <section>
+        <div  style="background: black;color: white;padding: 20px;font-size: 20px;" align="right">
+            <a href="logout.php">Logout</a>   
+        </div>
+    </section>
 
-<section>
-    <div class="rt-container">
-        <div class="row">
-        <?php 
-               $txt=mysqli_query($con,"select * from textdata where userid='$userId' order by id desc");
-            
-            $count=0;
-            $resText='';
-            while ($row=mysqli_fetch_assoc($txt)) {
-                if ($count==0) {
-                    $resText .=nl2br($row['textmsz']);
-                }else{
-                    $resText .='<br>'.nl2br($row['textmsz']);
+    <section>
+        <div class="rt-container">
+            <div class="row">
+                <textarea rows="5" class="cm-input" placeholder="Enter your text here..." id="mszarea" ></textarea>
+                <div align="right" style="margin-top:30px">
+                    <button style="border-radius: 5px;font-size: 16px;color: white;background: #482f97;padding: 10px;border: none;" onclick="published()" >Published</button>
+                </div>
+                <?php 
+                $txt=mysqli_query($con,"select * from textdata order by id desc");
+
+                $count=0;
+                $resText='';
+                while ($row=mysqli_fetch_assoc($txt)) {
+                    if ($count==0) {
+                        $resText .='<b>'.$row['name'].'</b> '.nl2br($row['textmsz']);
+                    }else{
+                        $resText .='<br>'.'<b>'.$row['name'].'</b> '.nl2br($row['textmsz']);
+                    }
+                    $count=$count+1;
                 }
-                $count=$count+1;
-            }
 
-            ?>     
-            <div id="mszdisplay" style="overflow-y: auto;max-height: 250px;">
-                <?php echo $resText; ?>
+                ?>     
+                <div id="mszdisplay" >
+                    <?php echo $resText; ?>
+                </div>   
             </div>
-           
-            <textarea rows="5" class="cm-input" placeholder="Enter your text here..." id="mszarea" ></textarea>
-            <div align="right" style="margin-top:30px">
-                <button style="border-radius: 5px;font-size: 16px;color: white;background: #482f97;padding: 10px;border: none;" onclick="published()" >Published</button>
-            </div>
-            
-          </div>
-    </div>
-</section>
+        </div>
+    </section>
 
-	</body>
+</body>
 </html>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -94,13 +92,13 @@ function published() {
               duration: 3000,
               newWindow: true,
               close: true,
-              gravity: "top", // `top` or `bottom`
-              position: "right", // `left`, `center` or `right`
-              stopOnFocus: true, // Prevents dismissing of toast on hover
+              gravity: "top", 
+              position: "right", 
+              stopOnFocus: true, 
               style: {
               background: "linear-gradient(to right, #00b09b, #96c93d)",
               },
-              onClick: function(){} // Callback after click
+              onClick: function(){} 
             }).showToast();
 
            }else{
@@ -109,13 +107,13 @@ function published() {
               duration: 3000,
               newWindow: true,
               close: true,
-              gravity: "top", // `top` or `bottom`
-              position: "right", // `left`, `center` or `right`
-              stopOnFocus: true, // Prevents dismissing of toast on hover
+              gravity: "top", 
+              position: "right", 
+              stopOnFocus: true, 
               style: {
               background: "linear-gradient(to right, #00b09b, #96c93d)",
               },
-              onClick: function(){} // Callback after click
+              onClick: function(){} 
             }).showToast();
 
            }
@@ -131,13 +129,13 @@ function published() {
               duration: 3000,
               newWindow: true,
               close: true,
-              gravity: "top", // `top` or `bottom`
-              position: "right", // `left`, `center` or `right`
-              stopOnFocus: true, // Prevents dismissing of toast on hover
+              gravity: "top", 
+              position: "right", 
+              stopOnFocus: true, 
               style: {
               background: "linear-gradient(to right, #00b09b, #96c93d)",
               },
-              onClick: function(){} // Callback after click
+              onClick: function(){} 
             }).showToast(); 
   }
 }
